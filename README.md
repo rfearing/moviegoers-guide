@@ -1,4 +1,4 @@
-# Ultimate Moviegoers Guide
+# ![Ultimate Moviegoers Guide](./public/logo.jpg) 
 
 ### 3rd Party Tools Utilized
 

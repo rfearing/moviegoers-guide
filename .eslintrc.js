@@ -14,8 +14,9 @@ module.exports = {
     'react/jsx-one-expression-per-line': 0,
     'react/react-in-jsx-scope': 0,
     'jsx-a11y/label-has-associated-control': [ 2, {'required': {'every': [ 'id' ]}}],
-    'import/no-extraneous-dependencies': 0, // ['error, {'devDependencies': false, 'optionalDependencies': true, 'peerDependencies': true }],
+    'import/no-extraneous-dependencies': 0, // ['error', {'devDependencies': false, 'optionalDependencies': true, 'peerDependencies': true }],
     'jsx-a11y/anchor-is-valid': 0, // for next.js Link
+    'camelcase': ['error', { ignoreDestructuring: true }],
   },
   settings: {
     'import/resolver': {

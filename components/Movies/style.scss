@@ -1,0 +1,52 @@
+$gap: 30px;
+
+.list {
+  display: grid;
+  gap: $gap;
+  grid-template: auto / 1fr;
+  padding: 0;
+
+  @include respond($TABLET) {
+    grid-template: auto / 1fr 1fr;
+  }
+}
+
+.chart {
+  display: block;
+  margin: 10px auto;
+  max-width: 50px;
+  max-height: 50px;
+  background: $blue;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.circle {
+  stroke: transparent;
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+  &[class~='red']  {
+    stroke: #800020;
+  }
+  &[class~='yellow']  {
+    stroke: #d2d531;
+  }
+  &[class~='green'] {
+    stroke: $green;
+  }
+}
+
+
+.percent {
+  font-size: 10px;
+  color: #FFF;
+  font-weight: bold;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}

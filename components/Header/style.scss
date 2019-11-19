@@ -1,1 +1,5 @@
-.pageHeader  { flex-shrink: 0; }
+.pageHeader  {
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from 'COMPONENTS/Header';
 import Footer from 'COMPONENTS/Footer';
+import Movies from 'COMPONENTS/Movies';
 import Pagination from 'COMPONENTS/Pagination';
 import { getMovies } from 'ACTIONS';
 import css from './start.scss';
@@ -32,7 +33,7 @@ const Home = ({
    */
   let content = (
     <>
-      <pre>{JSON.stringify(movies, null, 2)}</pre>
+      <Movies movies={movies} />
       <Pagination
         handlePagination={handlePagination}
       />
