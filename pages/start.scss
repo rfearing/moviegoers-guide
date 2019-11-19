@@ -1,0 +1,46 @@
+:global {
+  @import '../base/scss/normalize.scss';
+
+  body,
+  html { min-height: 100%; }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  li,
+  input,
+  textarea,
+  button {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  p {
+    color: $gray;
+    a { color: $green; }
+  }
+
+  .blue-background {
+    background: $blue;
+    color: #FFF;
+  }
+
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    height: 100vh;
+  }
+
+  // .container {
+  //   width: 90%;
+  //   max-width: $DESKTOP;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
+}
+
+.pageBody { flex-grow: 1; }

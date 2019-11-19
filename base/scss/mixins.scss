@@ -1,0 +1,26 @@
+/**
+ * Dynamic Media Queries
+ * Allow in-line media queries
+ * usage:
+ *  .selector { width: 100%;
+ *    @include respond(768px) { width: 30%; }
+ *    @include respond(768px, 'down') { width: 100%; }
+ *  }
+ */
+@mixin respond($breakpoint, $operator: 'up', $dimension: 'width') {
+  @if $operator == 'up' {
+    @media print, screen and (min-#{ $dimension }: $breakpoint) {
+      @content;
+    }
+  }
+
+  @else if $operator == 'down' {
+    @if unit( $breakpoint ) == 'px' {
+      $breakpoint: $breakpoint - 1;
+    }
+
+    @media screen and (max-#{ $dimension }: $breakpoint) {
+      @content;
+    }
+  }
+}
