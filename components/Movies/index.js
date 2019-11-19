@@ -12,7 +12,7 @@ const MoviesList = ({
   movies,
 }) => {
   let moviesList = movies.map((movie) => (
-    <Movie movie={movie} />
+    <Movie key={movie.id} movie={movie} />
   ));
 
   if (!movies || movies.length === 0) {

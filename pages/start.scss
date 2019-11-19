@@ -18,8 +18,11 @@
 
   p {
     color: $gray;
+
     a { color: $green; }
   }
+
+  img { max-width: 100%; }
 
   .blue-background {
     background: $blue;

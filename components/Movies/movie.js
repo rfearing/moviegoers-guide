@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getImageUrl } from 'BASE/utils';
+import { getImageUrl, getExcerpt } from 'BASE/utils';
 import style from './style.scss';
 
 const Movie = ({ movie }) => {
@@ -15,9 +15,11 @@ const Movie = ({ movie }) => {
   } = movie;
 
   const poster = getImageUrl(poster_path);
-  // const backdrop = getImageUrl(backdrop_path);
+  const excerpt = getExcerpt(overview, 30);
   const vote = vote_average * 10;
   let circleColor;
+
+  // Passing or Failing colors
   if (vote >= 70) {
     circleColor = 'green';
   } else if (vote >= 40) {
@@ -35,16 +37,25 @@ const Movie = ({ movie }) => {
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
       />
-      <text className={style.percent} fill="#FFF" x="30%" y="60%">{vote > 0 ? vote : 'NR'}</text>
+      <text className={style.percent} fill="#FFF" x="20%" y="65%">{vote > 0 ? vote : 'NR'}</text>
     </svg>
   );
 
   return (
-    <div className="jumbotron">
-      <img src={poster} />
-      <h4>{title}</h4>
-      <p>{overview}</p>
-      {circle}
+    <div className={style.movieItem}>
+      <div className={style.poster}>
+        <img src={poster} alt={`Movie poster for ${title}`} />
+      </div>
+      <div className={style.content}>
+        {circle}
+        <h5 className="clearfix">{title}</h5>
+        <p>{excerpt}</p>
+      </div>
+      <div className={style.info}>
+        <hr />
+        Learn more
+      </div>
+
     </div>
   );
 };

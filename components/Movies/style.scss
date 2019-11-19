@@ -1,4 +1,5 @@
-$gap: 30px;
+$gap: 40px;
+$chart_size: 2.15rem;
 
 .list {
   display: grid;
@@ -6,16 +7,51 @@ $gap: 30px;
   grid-template: auto / 1fr;
   padding: 0;
 
-  @include respond($TABLET) {
+  @include respond($LAPTOP) {
     grid-template: auto / 1fr 1fr;
+  }
+}
+
+.movieItem {
+  display: grid;
+  gap: 20px;
+  grid-template-areas:
+    'poster'
+    'content'
+    'info';
+
+  @include respond($TABLET) {
+    grid-template: 1fr 4rem / 40% 1fr;
+    grid-template-areas:
+      'poster content'
+      'poster info';
+  }
+
+
+  .poster {
+    grid-area: poster;
+  }
+
+  .content {
+    grid-area: content;
+
+    h5 { margin-top: 5px; }
+
+    svg {
+      float: left;
+      margin-right: 10px;
+    }
+  }
+
+  .info {
+    grid-area: info;
   }
 }
 
 .chart {
   display: block;
-  margin: 10px auto;
-  max-width: 50px;
-  max-height: 50px;
+  max-width: $chart_size;
+  max-height: $chart_size;
   background: $blue;
   padding: 5px;
   border-radius: 50%;
@@ -40,7 +76,7 @@ $gap: 30px;
 
 
 .percent {
-  font-size: 10px;
+  font-size: 1rem;
   color: #FFF;
   font-weight: bold;
 }
