@@ -3,7 +3,7 @@ const path = require('path');
 const relativeAliases = [
   ['BASE', './base'],
   ['COMPONENTS', './components/'],
-  ['ACTIONS', './actions/'],
+  ['SERVICES', './services/'],
 ];
 
 const absoluteAliases = {};

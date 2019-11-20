@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import css from './style.scss';
 
 /**
@@ -6,10 +7,15 @@ import css from './style.scss';
 export default () => (
   <header className={`blue-background ${css.pageHeader}`}>
     <div className="container py-3 justify-content-between d-flex align-items-center">
-      <img
-        alt="Logo for Ultimate Moviegoers Guide"
-        src="/logo.png"
-      />
+      <Link href="/">
+        <a>
+          <span hidden>Moviegoers Home</span>
+          <img
+            alt="Logo for Ultimate Moviegoers Guide"
+            src="/logo.png"
+          />
+        </a>
+      </Link>
       <input
         type="text"
         value=""

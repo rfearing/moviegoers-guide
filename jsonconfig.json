@@ -8,8 +8,8 @@
       "COMPONENTS/*": [
         "components/*"
       ],
-      "ACTIONS/*": [
-        "actions/*"
+      "SERVICES/*": [
+        "services/*"
       ]
     }
   },

@@ -5,8 +5,8 @@ import Header from 'COMPONENTS/Header';
 import Footer from 'COMPONENTS/Footer';
 import Movies from 'COMPONENTS/Movies';
 import Pagination from 'COMPONENTS/Pagination';
-import { getMovies } from 'ACTIONS';
-import css from './start.scss';
+import { getMovies } from 'SERVICES';
+import './start.scss';
 
 const Home = ({
   page,
@@ -29,10 +29,12 @@ const Home = ({
   return (
     <>
       <Header />
-      <div className={`container mt-4 ${css.pageBody}`}>
+      <div className="container mt-4 py-5 ${css.pageBody">
         {/* Show error message */}
         {error && (<div className="alert alert-danger" role="alert">{error.message}</div>)}
-        <Movies movies={movies} />
+        <div className="pb-5">
+          <Movies movies={movies} />
+        </div>
         <Pagination
           page={page}
           totalPages={totalPages}

@@ -38,12 +38,6 @@
     height: 100vh;
   }
 
-  // .container {
-  //   width: 90%;
-  //   max-width: $DESKTOP;
-  //   margin-left: auto;
-  //   margin-right: auto;
-  // }
+  .page-body { flex-grow: 1; }
 }
 
-.pageBody { flex-grow: 1; }

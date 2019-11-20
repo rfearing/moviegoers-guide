@@ -13,7 +13,7 @@
     "moduleNameMapper": {
       "^BASE(.*)$": "<rootDir>/base$1",
       "^COMPONENTS(.*)$": "<rootDir>/components$1",
-      "^ACTIONS(.*)$": "<rootDir>/actions$1",
+      "^SERVICES(.*)$": "<rootDir>/services$1",
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"
     }
   },

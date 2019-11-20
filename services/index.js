@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://api.github.com',
+  baseURL: 'https://api.themoviedb.org/3/',
   headers: {
     Authorization: `Bearer ${process.env.MOVIE_ACCESS_TOKEN}`,
     Accept: 'application/json;charset=utf-8',
@@ -10,7 +10,17 @@ const API = axios.create({
 });
 
 export const getMovies = (query = '') => (
-  API.get(`https://api.themoviedb.org/4/discover/movie${query}`)
+  API.get(`discover/movie${query}`)
+    .then((response) => {
+      if (response.status === 200) {
+        return response.data;
+      }
+      throw new Error(`${response.status}: ${response.statusText}`);
+    })
+);
+
+export const getMovie = (id = '') => (
+  API.get(`movie/${id}`)
     .then((response) => {
       if (response.status === 200) {
         return response.data;
