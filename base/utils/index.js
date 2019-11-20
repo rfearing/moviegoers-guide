@@ -7,3 +7,15 @@ export const getExcerpt = (text, count) => {
   const excerpt = excerptArray.join(' ');
   return `${excerpt} ...`;
 }
+
+export const getSmallestImage = (paths) => paths.reduce((prev, curr) => (
+  prev.width < curr.width ? prev : curr
+));
+
+export const getLargestImage = (paths) => paths.reduce((prev, curr) => (
+  prev.width > curr.width ? prev : curr
+));
+
+export const getHighestVotedImage = (paths) => paths.reduce((prev, curr) => (
+  prev.vote_count > curr.vote_count ? prev : curr
+));

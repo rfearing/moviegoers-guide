@@ -28,3 +28,13 @@ export const getMovie = (id = '') => (
       throw new Error(`${response.status}: ${response.statusText}`);
     })
 );
+
+export const getMovieImages = (id = '') => (
+  API.get(`movie/${id}/images`)
+    .then((response) => {
+      if (response.status === 200) {
+        return response.data;
+      }
+      throw new Error(`${response.status}: ${response.statusText}`);
+    })
+);
