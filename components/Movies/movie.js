@@ -37,7 +37,14 @@ const Movie = ({ movie }) => {
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
       />
-      <text className={style.percent} fill="#FFF" x="20%" y="65%">{vote > 0 ? vote : 'NR'}</text>
+      <text
+        className={style.percent}
+        fill="#FFF"
+        x={vote === 100 ? '16%' : '25%'}
+        y="65%"
+      >
+        {vote > 0 ? vote : 'NR'}
+      </text>
     </svg>
   );
 

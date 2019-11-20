@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Router, { withRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import Header from 'COMPONENTS/Header';
 import Footer from 'COMPONENTS/Footer';
@@ -8,47 +9,22 @@ import { getMovies } from 'ACTIONS';
 import css from './start.scss';
 
 const Home = ({
+  page,
   movies,
+  totalPages,
 }) => {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   /**
    * Request paginated movies and update state.
    */
-  const handlePagination = async () => {
+  const handlePagination = async (newPage) => {
     try {
-      setLoading(true);
-      // Pagination added after API
-      setTimeout(() => null, 1000);
-      setLoading(false);
+      Router.push(`/?page=${newPage}`);
     } catch (e) {
       setError(e);
-      setLoading(false);
     }
   };
-
-  /*
-   * Movie List or Loading state
-   */
-  let content = (
-    <>
-      <Movies movies={movies} />
-      <Pagination
-        handlePagination={handlePagination}
-      />
-    </>
-  );
-
-  if (loading) {
-    content = (
-      <div className={css.centerContent}>
-        <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -56,26 +32,38 @@ const Home = ({
       <div className={`container mt-4 ${css.pageBody}`}>
         {/* Show error message */}
         {error && (<div className="alert alert-danger" role="alert">{error.message}</div>)}
-        {content}
+        <Movies movies={movies} />
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          handlePagination={handlePagination}
+        />
       </div>
       <Footer />
     </>
   );
 };
 
-Home.getInitialProps = async () => {
-  const response = await getMovies();
+Home.getInitialProps = async ({ query }) => {
+  const { page } = query;
+  const qString = page ? `?page=${page}` : '';
+  const response = await getMovies(qString);
+
   return {
     movies: response.results || [],
+    totalPages: response.total_pages || 0,
+    page: page ? Number(page) : 1,
   };
 };
 
 Home.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object),
+  totalPages: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
 };
 
 Home.defaultProps = {
   movies: [],
 };
 
-export default Home;
+export default withRouter(Home);
