@@ -1,0 +1,47 @@
+
+.movieBox {
+  background: transparentize(#000, 0.25);
+  display: grid;
+  gap: 20px;
+  grid-template-areas:
+    'poster'
+    'content';
+
+  @include respond($TABLET) {
+    grid-template-columns: 40% 1fr;
+    grid-template-areas: 'poster content'
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.poster {
+  grid-area: poster;
+}
+
+.content {
+  grid-area: content;
+  padding: 20px;
+
+  h1 {
+    color: #FFF;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  p {
+    color: #FFF;
+  }
+
+  svg {
+    float: left;
+    margin-right: 10px;
+  }
+}
+
+.info {
+  grid-area: info;
+}
