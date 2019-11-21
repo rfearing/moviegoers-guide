@@ -18,6 +18,8 @@
 
 `yarn install`
 
+**Before running the app you need to add a `MOVIE_ACCESS_TOKEN` environment variable (`.env` file in dev) from the [Movie DB Settings Page](https://www.themoviedb.org/settings/api)**
+
 ### Running the App:
 
 `yarn dev` Starts the development server.
