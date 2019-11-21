@@ -10,7 +10,8 @@
   border: 0;
   border-bottom: 2px solid #FFF;
   padding: 0.25rem;
-  width: 100%;
+  flex-grow: 1;
+  margin-right: 1rem;
   color: #FFF;
 
   &:focus {
@@ -21,8 +22,9 @@
   ::placeholder {
     color: transparentize(#FFF, 0.15);
   }
+}
 
-  @include respond($TABLET) {
-    width: 33%;
-  }
+.searchBtn {
+  background: $green;
+  color: #FFF;
 }

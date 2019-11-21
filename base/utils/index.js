@@ -63,14 +63,14 @@ export const generateQueryString = (params = {}) => {
 };
 
 /**
- * There are different API EndPoints depending on the search.
- * This picks the right one.
+ * The Movie DB has different Endpoint structures depending on your choices.
+ * This picks the right API call and returns it.
  * @param {Object} params
  *
  * @returns {Function}
  */
 export const pickCorrectEndpoint = (params = {}) => {
-  if (params.search) {
+  if (params.query) {
     return searchMovies;
   }
   if (typeof params.playing === 'string') {

@@ -14,6 +14,7 @@ const Home = ({
   movies,
   totalPages,
   sort_by,
+  query,
   playing,
   list,
   er,
@@ -43,9 +44,14 @@ const Home = ({
    * Request paginated movies and update state.
    */
   const handlePagination = async (newPage) => {
-    const query = generateQueryString({ sort_by, playing, page: newPage });
+    const newQuery = generateQueryString({
+      sort_by,
+      playing,
+      query,
+      page: newPage,
+    });
     try {
-      Router.push(`/${query}`);
+      Router.push(`/${newQuery}`);
     } catch (e) {
       setError(e);
     }
@@ -62,9 +68,20 @@ const Home = ({
     }
   };
 
+  /**
+   * Request paginated movies and update state.
+   */
+  const handleSearch = async (searchTerm) => {
+    try {
+      Router.push(`/?query=${encodeURI(searchTerm)}`);
+    } catch (e) {
+      setError(e);
+    }
+  };
+
   return (
     <>
-      <Header />
+      <Header handleSearch={handleSearch} />
       <div className="container mt-4 pb-5 pt-4 ${css.pageBody">
         {error && (<div className="alert alert-danger" role="alert">{error.message}</div>)}
 
@@ -79,6 +96,7 @@ const Home = ({
         <div className="pb-5">
           <Movies movies={movies} />
         </div>
+
         <Pagination
           page={page}
           totalPages={totalPages}
@@ -90,37 +108,42 @@ const Home = ({
   );
 };
 
-Home.getInitialProps = async ({ query }) => {
+/**
+ * Make API Calls and pass down as props to component.
+ * Note getInitialProps is called on the server.
+ * @param {Object} query - Renamed "server" because Movie DB's search is called "query"
+ */
+Home.getInitialProps = async ({ query: server }) => {
   const {
     page,
     sort_by,
     playing,
-    search,
-  } = query || {};
+    query,
+  } = server || {};
 
-  const qString = generateQueryString({ page, sort_by, search });
-  const api = pickCorrectEndpoint(query);
-  const isNowPlaying = (typeof playing === 'string');
+  const queryString = generateQueryString({ page, sort_by, query });
+  const api = pickCorrectEndpoint(server);
   let er = false;
-  let response;
 
+  let response;
   try {
-    response = await api(qString);
+    response = await api(queryString);
   } catch (error) {
     er = error;
   }
 
-  // To easily check in the component:
+  // To easily check later in the component:
   let list = 'popular';
   if (sort_by && sort_by.includes('vote_average')) { list = 'top_rated'; }
-  if (isNowPlaying) { list = 'playing'; }
+  if (typeof playing === 'string') { list = 'playing'; }
 
   return {
     movies: response.results || [],
     totalPages: response.total_pages || 0,
     page: page ? Number(page) : 1,
     sort_by,
-    playing: isNowPlaying,
+    query,
+    playing: (typeof playing === 'string'),
     list,
     er,
   };
@@ -133,6 +156,7 @@ Home.propTypes = {
   list: PropTypes.string.isRequired,
   er: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   sort_by: PropTypes.string,
+  query: PropTypes.string, // Note: This is the search query
   playing: PropTypes.bool,
 };
 
@@ -140,6 +164,7 @@ Home.defaultProps = {
   movies: [],
   er: false,
   sort_by: null,
+  query: null,
   playing: false,
 };
 
