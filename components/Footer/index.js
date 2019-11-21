@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
 export default () => (
   <footer className={`blue-background ${css.pageFooter}`}>
     <div className="container py-2">
-      <div className="d-flex justify-content-between">
+      <div className="d-flex flex-column flex-md-row justify-content-between">
         <p className="m-0 text-light">You should hire Ricardo in <b>{currentYear}</b>!</p>
         <p className="m-0 text-light">
           <span role="img" aria-label="Metal hand emoji">🤘</span>&nbsp;
