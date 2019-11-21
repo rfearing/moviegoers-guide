@@ -10,7 +10,7 @@ const Header = ({
   search,
   handleSearch,
 }) => {
-  const [searchTerm, setSearchTerm] = useState(decodeURI(search));
+  const [searchTerm, setSearchTerm] = useState(search ? decodeURI(search) : '');
   const handleUpdateSearch = (ev) => {
     const { value } = ev.target;
     setSearchTerm(value);

@@ -1,6 +1,9 @@
 {
   "name": "moviegoers-guide",
   "version": "0.1.0",
+  "engines": {
+    "node": "10.16.3"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -26,13 +29,12 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.18.2",
     "lodash": "^4.17.15",
-    "next": "9.1.1",
+    "next": "9.1.4",
     "node-sass": "^4.13.0",
     "prop-types": "^15.7.2",
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-icons": "^3.8.0",
-    "react-testing-library": "^8.0.1",
     "sass-resources-loader": "^2.0.1"
   },
   "devDependencies": {
@@ -49,8 +51,10 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.2.0",
+    "faker": "^4.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
+    "jest-dom": "^4.0.0",
     "react-test-renderer": "^16.12.0"
   }
 }

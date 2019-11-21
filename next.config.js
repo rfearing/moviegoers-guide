@@ -12,7 +12,7 @@ module.exports = withCSS(withSass({
   env: {
     MOVIE_ACCESS_TOKEN: process.env.MOVIE_ACCESS_TOKEN,
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     const newConfig = { ...config };
     newConfig.module.rules = [
       ...newConfig.module.rules,
@@ -29,6 +29,13 @@ module.exports = withCSS(withSass({
         ],
       },
     ];
+    // Fixes npm packages that depend on `fs` module
+    if (!isServer) {
+      newConfig.node = {
+        fs: 'empty',
+      };
+    }
+
     newConfig.resolve.alias = {
       ...config.resolve.alias,
       ...aliases.absoluteAliases,

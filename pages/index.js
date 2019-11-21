@@ -9,6 +9,8 @@ import Sort from 'COMPONENTS/Sort';
 import { generateQueryString, pickCorrectEndpoint } from 'BASE/utils';
 import './start.scss';
 
+export const noMoviesText = 'We could\'nt find any matching movies.';
+
 const Home = ({
   page,
   movies,
@@ -16,28 +18,27 @@ const Home = ({
   sort_by,
   query,
   playing,
-  list,
   er,
 }) => {
   const [error, setError] = useState(er);
-  let heading;
-  let allowPopular = true;
+  let heading = 'Popular Movies';
+  let allowPopular = false;
   let allowNowPlaying = true;
   let allowTopRated = true;
 
-  // Switch between which buttons are active and the correct heading.
-  switch (list) {
-    case 'playing':
-      allowNowPlaying = false;
-      heading = 'Movies Playing Now';
-      break;
-    case 'top_rated':
-      allowTopRated = false;
-      heading = 'Top Rated Movies';
-      break;
-    default:
-      allowPopular = false;
-      heading = 'Popular Movies';
+  if (sort_by && sort_by.includes('vote_average')) {
+    allowPopular = true;
+    allowTopRated = false;
+    heading = 'Top Rated Movies';
+  }
+  if (playing) {
+    allowPopular = true;
+    allowNowPlaying = false;
+    heading = 'Movies Playing Now';
+  }
+  if (query) {
+    allowPopular = true;
+    heading = `Search Results for ${decodeURI(query)}`;
   }
 
   /**
@@ -79,12 +80,22 @@ const Home = ({
     }
   };
 
+  /**
+   * Display no movies text if none are found
+   */
+  const content = movies && movies.length > 0
+    ? (
+      <div className="pb-5">
+        <Movies movies={movies} />
+      </div>
+    )
+    : <h1>{noMoviesText}</h1>;
+
   return (
     <>
-      <Header handleSearch={handleSearch} />
-      <div className="container mt-4 pb-5 pt-4 ${css.pageBody">
+      <Header handleSearch={handleSearch} search={query} />
+      <div className="container mt-4 pb-5 pt-4 page-body">
         {error && (<div className="alert alert-danger" role="alert">{error.message}</div>)}
-
         <Sort
           handleChangeList={handleChangeList}
           allowNowPlaying={allowNowPlaying}
@@ -92,11 +103,7 @@ const Home = ({
           allowTopRated={allowTopRated}
           heading={heading}
         />
-
-        <div className="pb-5">
-          <Movies movies={movies} />
-        </div>
-
+        {content}
         <Pagination
           page={page}
           totalPages={totalPages}
@@ -132,11 +139,6 @@ Home.getInitialProps = async ({ query: server }) => {
     er = error;
   }
 
-  // To easily check later in the component:
-  let list = 'popular';
-  if (sort_by && sort_by.includes('vote_average')) { list = 'top_rated'; }
-  if (typeof playing === 'string') { list = 'playing'; }
-
   return {
     movies: response.results || [],
     totalPages: response.total_pages || 0,
@@ -144,16 +146,14 @@ Home.getInitialProps = async ({ query: server }) => {
     sort_by,
     query,
     playing: (typeof playing === 'string'),
-    list,
     er,
   };
 };
 
 Home.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object),
-  totalPages: PropTypes.number.isRequired,
-  page: PropTypes.number.isRequired,
-  list: PropTypes.string.isRequired,
+  totalPages: PropTypes.number,
+  page: PropTypes.number,
   er: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   sort_by: PropTypes.string,
   query: PropTypes.string, // Note: This is the search query
@@ -161,6 +161,8 @@ Home.propTypes = {
 };
 
 Home.defaultProps = {
+  totalPages: 0,
+  page: 1,
   movies: [],
   er: false,
   sort_by: null,

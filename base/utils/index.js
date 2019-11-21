@@ -1,14 +1,17 @@
 import words from 'lodash/words';
 import { getMovies, searchMovies, getPlayingMovies } from 'SERVICES';
 
+export const imageRoot = 'https://image.tmdb.org/t/p/w370_and_h556_bestv2';
+export const defaultImg = '/default-poster.jpg';
+
 /**
  * Get image src URL for TMDB or the default img
  * @param {String} end
  */
 export const getImageUrl = (end) => {
   return end
-    ? `https://image.tmdb.org/t/p/w370_and_h556_bestv2${end}`
-    : '/default-poster.jpg';
+    ? `${imageRoot}${end}`
+    : defaultImg;
 };
 
 /**
@@ -16,7 +19,7 @@ export const getImageUrl = (end) => {
  * @param {String} text - Original description
  * @param {Int} count - The max number of words
  */
-export const getExcerpt = (text, count) => {
+export const getExcerpt = (text, count = 50) => {
   const excerptArray = words(text).slice(0, count);
   const excerpt = excerptArray.join(' ');
   return `${excerpt} ...`;
