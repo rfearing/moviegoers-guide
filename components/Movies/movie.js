@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -10,7 +9,6 @@ const Movie = ({ movie }) => {
     title,
     poster_path,
     id,
-    // backdrop_path,
     vote_average,
     overview,
   } = movie;
@@ -67,7 +65,6 @@ const Movie = ({ movie }) => {
           </Link>
         </p>
       </div>
-
     </div>
   );
 };

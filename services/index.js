@@ -19,6 +19,26 @@ export const getMovies = (query = '') => (
     })
 );
 
+export const searchMovies = (query = '') => (
+  API.get(`search/movie${query}`)
+    .then((response) => {
+      if (response.status === 200) {
+        return response.data;
+      }
+      throw new Error(`${response.status}: ${response.statusText}`);
+    })
+);
+
+export const getPlayingMovies = (query = '') => (
+  API.get(`movie/now_playing${query}`)
+    .then((response) => {
+      if (response.status === 200) {
+        return response.data;
+      }
+      throw new Error(`${response.status}: ${response.statusText}`);
+    })
+);
+
 export const getMovie = (id = '') => (
   API.get(`movie/${id}`)
     .then((response) => {

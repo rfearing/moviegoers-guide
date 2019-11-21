@@ -16,7 +16,7 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': [ 2, {'required': {'every': [ 'id' ]}}],
     'import/no-extraneous-dependencies': 0, // ['error', {'devDependencies': false, 'optionalDependencies': true, 'peerDependencies': true }],
     'jsx-a11y/anchor-is-valid': 0, // for next.js Link
-    'camelcase': ['error', { ignoreDestructuring: true }],
+    'camelcase': 0,
   },
   settings: {
     'import/resolver': {

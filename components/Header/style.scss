@@ -1,5 +1,28 @@
 .pageHeader  {
+  z-index: 1;
   flex-shrink: 0;
   position: sticky;
   top: 0;
+}
+
+.search {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid #FFF;
+  padding: 0.25rem;
+  width: 100%;
+  color: #FFF;
+
+  &:focus {
+    border-color: $green;
+    outline: none;
+  }
+
+  ::placeholder {
+    color: transparentize(#FFF, 0.15);
+  }
+
+  @include respond($TABLET) {
+    width: 33%;
+  }
 }

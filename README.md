@@ -1,4 +1,4 @@
-# ![Ultimate Moviegoers Guide](./public/logo.jpg) 
+# ![Ultimate Moviegoers Guide](./public/logo.jpg)
 
 ### 3rd Party Tools Utilized
 
@@ -12,6 +12,7 @@
 
 * Utilize Aliases for calling files within the project. This prevents long directory imports.
 * Utilize CSS Modules with SASS implemtation
+* **Note** If you aren't familiar with Next.js, you can think of the `/pages` directory as your router
 
 ### Building the App
 

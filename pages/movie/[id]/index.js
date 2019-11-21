@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import { withRouter } from 'next/router';
 import PropTypes from 'prop-types';
